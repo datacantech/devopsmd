@@ -1,3 +1,5 @@
+# описание процесса деплоя 
+```mermaid
 flowchart LR
    %% источники
     Git["Git-репозитории<br>(gitlab или bitbucket)"] --"•исходный код app<br>•helm-чарты<br>•пайплайны<br>•ansible"-->  CI["CI/CD система:<br>• gitlab<br>• teamcity<br>• jenkins"]
@@ -58,7 +60,7 @@ flowchart LR
     style loki fill:#fff
     style grafana fill:#fff
     style prometheus fill:#fff
-
+```
 ## описание каждого компонента и его предназначения в представленной диаграмме:  
 
 | **Компонент**        | **Участие в процессе**                                                                 | **Предназначение**                                                                 |
