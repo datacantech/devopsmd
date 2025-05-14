@@ -1,4 +1,5 @@
-# devopsmd
+# описание для кластера
+```mermaid
 flowchart TD
     %% Ноды кластера
     subgraph Kubernetes Cluster
@@ -38,4 +39,4 @@ flowchart TD
     style CM fill:#ef7b4d,color:white
     style Scheduler fill:#ef7b4d,color:white
     style CCM fill:#ef7b4d,color:white
-
+```
