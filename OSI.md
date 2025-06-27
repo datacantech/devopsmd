@@ -1,0 +1,1 @@
+модель Open Systems Interconnection
