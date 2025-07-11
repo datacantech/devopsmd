@@ -2,29 +2,56 @@
 
 ```mermaid
 flowchart LR
-   %% общее описание
-    A[Команда: Обсуждает идею IT проекта] --> B[Команда декомпозирует на эпики и выбирает архитекруру и технологический стек]
-    B --> C[Команда декомпозирует на подзадачи (Issue/Ticket)]
-    C --> D[Создание .md файлов для каждой из подзадач, например Python-проекта]
-    D --> E[AI-агент парсит .md файлы для получения задания]
-    E --> F[AI-агент разрабатывает код]
-    F --> G[AI-агент создает фича ветку/пушит в нее код/кидает запрос на объединение в main]
-    G --> H[команда выполняет код ревью и мержит]
-    H --> I[релиз выкатывается на тестовый стенд, при необходимости AI-агент созадет инфру в другом потоке]
-    I --> J[текущий код отдается на улучшение для AI-агента]
-    J -->|"в случае необходимости"| С
+    %% Общий процесс
+    A[Команда: Обсуждает идею IT проекта] --> B[Декомпозиция на эпики и выбор стека]
+    B --> C[Создание задач в Issue Tracker]
+    C --> D[Написание ТЗ в .md файлах]
+    D --> E[AI-агент: Парсинг задания]
+    E --> F[Разработка кода]
+    F --> G[Git Workflow]
+    G --> H[Ревью кода]
+    H --> I[Деплой на тестовый стенд]
+    I --> J[Сбор feedback]
+    J -->|Оптимизация| C
 
-    %% Стили
-    style A fill:#fc6d26,color:white
-    style B fill:#fc6d26,color:white
-    style C fill:#fc6d26,color:white
-    style D fill:#fc6d26,color:white
-    style E fill:#ff9900,color:black
-    style F fill:#ff9900,color:black
-    style G fill:#ff9900,color:black
-    style H fill:#ef7b4d,color:white
-    style I fill:#ffec6e
-    style J fill:#60b932
+    %% Подробности по блокам
+    subgraph Команда
+    A -->|"Планирование<br>(Miro, Notion)"| B
+    B -->|"Архитектура:<br>- Микросервисы<br>- БД<br>- API"| C
+    C -->|"Пример .md:<br>```markdown<br>## Цель<br>Реализовать ...<br>## Стек:<br>- Python 3.11<br>- FastAPI```"| D
+    H -->|"Проверка:<br>- PEP8<br>- Тесты<br>- Безопасность"| I
+    end
+
+    subgraph AI-агент
+    E -->|"Анализ .md:<br>- Цель<br>- Стек<br>- Требования"| F
+    F -->|"Генерация:<br>```python<br>@app.post('/predict')<br>def predict(): ...```"| G
+    G -->|"Автоматизировано:<br>1. git checkout -b feature/123<br>2. git push<br>3. Create PR"| H
+    end
+
+    subgraph Инфраструктура
+    I -->|"Terraform/Ansible:<br>```hcl<br>resource 'aws_instance' 'test' {<br>  ami = 'ami-123'<br>}```"| J
+    J -->|"Логирование:<br>- Prometheus<br>- Grafana"| C
+    end
+
+    %% Стилизация
+    style Команда fill:#fc6d26,color:white,stroke:#333
+    style AI-агент fill:#ff9900,color:black,stroke:#333
+    style Инфраструктура fill:#60b932,color:white,stroke:#333
+    style A,B,C,D,H fill:#fc6d26,color:white
+    style E,F,G fill:#ff9900,color:black
+    style I,J fill:#60b932,color:white
+
+    %% Легенда
+    legend[("
+        <div style='display:inline-block;margin:5px'>
+            <div style='background:#fc6d26;width:15px;height:15px;display:inline-block'></div> Команда
+        </div>
+        <div style='display:inline-block;margin:5px'>
+            <div style='background:#ff9900;width:15px;height:15px;display:inline-block'></div> AI-агент
+        </div>
+        <div style='display:inline-block;margin:5px'>
+            <div style='background:#60b932;width:15px;height:15px;display:inline-block'></div> Инфраструктура
+    ")]
 ```
 
 
